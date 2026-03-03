@@ -1,0 +1,26 @@
+[
+  {
+    "nombre": "cemento",
+    "precio": 120.0,
+    "provedor": "Cemento Cruz Azul",
+    "stock": 30
+  },
+  {
+    "nombre": "silicon",
+    "precio": 55.0,
+    "provedor": "acrilastic ",
+    "stock": 30
+  },
+  {
+    "nombre": "cinta de aislante",
+    "precio": 20.0,
+    "provedor": "marca patito",
+    "stock": 40
+  },
+  {
+    "nombre": "tornillos",
+    "precio": 50.0,
+    "provedor": "marca propia",
+    "stock": 100
+  }
+]
