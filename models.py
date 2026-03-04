@@ -1,3 +1,4 @@
+import json
 #Creamos la clase llamada "Material"
 class Material :
     #se llama al "contructor" (__init__) con el objetio (self) y los atributos  con las condiciones (str para texto y float para numeros)
@@ -12,18 +13,28 @@ class Material :
         return (nombre)
     def validacion_precio(self, precio):
         if not isinstance(precio, (float, int) ) or (precio) < 0:
-            raise ValueError ("Ingresa un numero entero valido")
+            raise ValueError ("Ingresa un numero valido")
         return (precio)
     def validacion_prov(self, provedor):
         if not isinstance(provedor, str) or not provedor.strip():
             raise ValueError("Ingresa un nombre de provedor valido")
         return(provedor)
     def validacion_stock(self, stock):
-        if not isinstance(stock, (int, float) ) or (stock) < 0:
+        if not isinstance(stock, (int, int) ) or (stock) < 0:
             raise ValueError ("Ingresa un numero de stock valido")
         return (stock)
+    def to_dict (self):
+        return {
+            'nombre' : self.nombre,
+            'precio': self.precio,
+            'provedor' : self.provedor,
+            'stock' : self.stock
+        }
+    @classmethod
+    def from_inventario (cls, datos):
+        return cls(nombre=datos['nombre'], precio=datos['precio'], provedor=datos['provedor'], stock=datos['stock'])
+    def __repr__(self):
+        return f"Material(nombre='{self.nombre}', precio='{self.precio}',provedor'{self.provedor}', stock{self.stock})"
     #Una fucnion para que se repita con todos los materiales y se imprima el objeto definido y sus atributos
     def __str__(self):
-        return f'Material:{self.nombre}| Precio:${self.precio}| Provedor :{self.provedor}'
-
-
+        return f'Material:{self.nombre}| Precio:${self.precio}| Provedor :{self.provedor}| Stock:{self.stock}'

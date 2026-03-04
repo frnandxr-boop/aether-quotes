@@ -1,5 +1,4 @@
 from models import Material
-from collections import defaultdict
 import json
 #trata de:
 try: 
@@ -9,6 +8,12 @@ try:
 except FileNotFoundError:
     datos_guardados=[]
 
+datos_objetos = [Material.from_inventario(d) for d in datos_guardados]
+total_dinero = 0
+for m in datos_objetos:
+    total_dinero += m.precio * m.stock
+
+print(f"--- Sistema Iniciado: Valor Total en Almacén: ${total_dinero} ---")
 #Nuestra lista vacia 
 list_mat = []
 #Se inicia un bucle while para que se puedan agregar mas datos a nuestra lista
@@ -17,7 +22,7 @@ while True:
         #se le pregunta al usuario el nombre del material 
         nombre = str(input('Escribe el nombre del material: '))
         #se pregunta el costo 
-        precio = float(input(f"Ingresa el precio del {nombre}: "))
+        precio = float(input(f"Ingresa el precio de {nombre}: "))
         #provedor
         provedor = str(input('Nombre del proveedor: '))
         #se define mat, es la que junta todo (clase,objeto,atributos)
@@ -35,10 +40,11 @@ while True:
         print(f'error {e} ')
 #se crea el diccionario recorriendo la lista con todos sus datos 
 #__dict__ se utiliza para 'transformar' los datos de la lista en texto que el json pueda leer
-dic_mat_list= [material.__dict__ for material in list_mat]
+dic_mat_list= [material.to_dict() for material in list_mat]
 #-----Creacion de .JSON----
 #Se define una lista a la cual se agregaran los nuevos datos
 lista_final= datos_guardados + dic_mat_list
 #se abre el archivo .JSON y se escriben los nuevos materiales agregando los que ya estaban anteriormente
 with open ('inventario.json', 'w') as mat:
    json.dump(lista_final, mat, indent=2)
+lista_mat_final =[]

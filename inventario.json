@@ -22,5 +22,11 @@
     "precio": 50.0,
     "provedor": "marca propia",
     "stock": 100
+  },
+  {
+    "nombre": "pala",
+    "precio": 160.0,
+    "provedor": "truper",
+    "stock": 4
   }
 ]
