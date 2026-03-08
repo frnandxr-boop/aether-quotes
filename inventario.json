@@ -1,32 +1,44 @@
 [
   {
     "nombre": "cemento",
-    "precio": 120.0,
-    "provedor": "Cemento Cruz Azul",
-    "stock": 30
+    "precio": 150.0,
+    "proveedor": "Cementos Tolteca",
+    "stock": 60
   },
   {
     "nombre": "silicon",
     "precio": 55.0,
-    "provedor": "acrilastic ",
+    "proveedor": "acrilastic ",
     "stock": 30
   },
   {
     "nombre": "cinta de aislante",
     "precio": 20.0,
-    "provedor": "marca patito",
+    "proveedor": "marca patito",
     "stock": 40
   },
   {
     "nombre": "tornillos",
     "precio": 50.0,
-    "provedor": "marca propia",
+    "proveedor": "marca propia",
     "stock": 100
   },
   {
     "nombre": "pala",
     "precio": 160.0,
-    "provedor": "truper",
+    "proveedor": "truper",
     "stock": 4
+  },
+  {
+    "nombre": "alambre",
+    "precio": 30.0,
+    "proveedor": "marca propia",
+    "stock": 120
+  },
+  {
+    "nombre": "martillo",
+    "precio": 48.0,
+    "proveedor": "Herramientas Hernandez",
+    "stock": 10
   }
 ]
