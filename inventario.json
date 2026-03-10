@@ -1,11 +1,5 @@
 [
   {
-    "nombre": "cemento",
-    "precio": 150.0,
-    "proveedor": "Cementos Tolteca",
-    "stock": 60
-  },
-  {
     "nombre": "silicon",
     "precio": 55.0,
     "proveedor": "acrilastic ",
@@ -25,9 +19,9 @@
   },
   {
     "nombre": "pala",
-    "precio": 160.0,
-    "proveedor": "truper",
-    "stock": 4
+    "precio": 88.0,
+    "proveedor": "Ferreter",
+    "stock": 40
   },
   {
     "nombre": "alambre",

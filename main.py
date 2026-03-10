@@ -1,5 +1,6 @@
 from models import Material
 import json
+from services import InventarioService
  
 #trata de:
 try: 
@@ -28,19 +29,13 @@ while True:
         #Se crea la variable 'accion' para guardar la respuesta del usuario
         accion = input("¿Que accion deseas realizar?: ")
         #Para buscar un material la respues guardada en "accion" debe ser "buscar material"
-        if  accion.lower() == 'buscar material':
+        if accion.lower() == 'buscar material':
             print("Buscador")
-            material_buscado = []
-            encontrado = False
             busqueda=input("¿Que material buscas?")
-            for material in datos_objetos :
-                if material.nombre.lower() == busqueda:
-                    print(material)
-                    encontrado = True
-                    break 
-            if not encontrado:
-                print(f'{busqueda} no encontrado')
+            InventarioService.buscar_material(datos_objetos, busqueda)
+            
         elif accion.lower()  == 'agregar material':
+            print("Agregar Materiales")
             #se le pregunta al usuario el nombre del material 
             nombre = str(input('Escribe el nombre del material: '))
             #se pregunta el costo 
@@ -49,64 +44,28 @@ while True:
             proveedor = str(input('Nombre del proveedor: '))
             #se define mat, es la que junta todo (clase,objeto,atributos)
             stock = int(input(f'Ingresa la cantidad de {nombre} en stock: '))
-            mat = Material(nombre,precio,proveedor,stock)
-            print(mat)
-            list_mat.append(mat)
+            InventarioService.agregar_materiales(datos_objetos, nombre, precio, proveedor, stock)
             
-        #Para editar los materiales en el json ("editar material")  
         elif accion.lower()  == 'editar material':
-            nvo_precio =[]
-            nvo_stock=[]
-            nvo_proveedor=[]
-            todo=[]
+            print("Editor de Materiales")
             material_a_editar= input("Escribe el material a editar: ")
-            
-            material_edit=next((m for m in datos_objetos if m.nombre == material_a_editar), None)
             edit=input("¿Que deseas editar(stock,proveedor,precio,todo)? ")
-            #funciones para todas los posibles cambios/ediciones
-            def editar_stock(material):
-                    nvo_stock = int(input(f"Ingresa la cantidad en stock de {material.nombre}: "))
-                    material_edit.stock = nvo_stock
-                    print(f'stock actualizado con exito: {material.nombre} -- {material.stock}')
-                    
-            def editar_precio(material):    
-                    nvo_precio = float(input(f"Ingresa el nuevo precio de {material.nombre}: "))
-                    material_edit.precio= nvo_precio
-                    print(f'Precio actualizado con exito: {material.nombre} -- {material.precio}')
-                    
-            def editar_proveedor(material):       
-                    nvo_proveedor = str(input(f'ingresa el nuevo proveedor de {material.nombre}: '))
-                    material_edit.proveedor = nvo_proveedor
-                    print(f'Provedor actualizado con exito: {material.nombre} -- {material.proveedor}')
-            #Se crea una funcion que englobe todo 
-            def editar_todo(material):
-                    editar_stock(material_edit)
-                    editar_precio(material_edit)
-                    editar_proveedor(material_edit)
-                    print(f"{material.nombre} editado con exito : {material.nombre}-- {material.precio}--{material.proveedor}--{material.stock}")
-            #Se llaman y activan las funciones 
-            if edit.lower() == 'stock':
-                editar_stock(material_edit)
-            elif edit.lower() == 'precio':
-                editar_precio(material_edit)
-            elif edit.lower() == 'proveedor':
-                editar_proveedor(material_edit)
-            elif edit.lower() == 'todo':
-                editar_todo(material_edit)
-            #Aqui terminan las acciones y se pregunta si quiere salir o realizar una nueva accion
-            
+            InventarioService.editar_materiales(datos_objetos,material_a_editar, edit)
+        
+        elif accion.lower() == "eliminar material" :
+            print("Eliminar Materiales")
+            busqueda=input("¿Que material quieres eliminar?")
+            InventarioService.eliminar_materiales(datos_objetos, busqueda)
+        
         elif accion.lower() == "salir":
             break
     #si un dato esta mal, salta error y se apoda 'e' asi sabemos exactamente cual fue el error
     except ValueError as e:
         print(f'error {e} ')
 #se crea el diccionario recorriendo la lista con todos sus datos 
-#__dict__ se utiliza para 'transformar' los datos de la lista en texto que el json pueda leer
-####dic_mat_list= [material.to_dict() for material in datos_objetos + list_mat]###
-datos_g=[material.to_dict() for material in datos_objetos + list_mat]
+datos_g=[m.to_dict() for m in datos_objetos]
 #-----Creacion de .JSON----
 #Se define una lista a la cual se agregaran los nuevos datos
-###lista_final= datos_guardados + dic_mat_list##
 #se abre el archivo .JSON y se escriben los nuevos materiales agregando los que ya estaban anteriormente
 with open ('inventario.json', 'w') as mat:
    json.dump(datos_g, mat, indent=2)
