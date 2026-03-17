@@ -34,6 +34,7 @@ while True:
             busqueda=input("¿Que material buscas?")
             InventarioService.buscar_material(datos_objetos, busqueda)
             
+            
         elif accion.lower()  == 'agregar material':
             print("Agregar Materiales")
             #se le pregunta al usuario el nombre del material 
@@ -47,10 +48,32 @@ while True:
             InventarioService.agregar_materiales(datos_objetos, nombre, precio, proveedor, stock)
             
         elif accion.lower()  == 'editar material':
+            buscado = input("¿Qué material buscas para editar?: ")
+            
+            # Primero verificamos si existe antes de preguntar qué editar
             print("Editor de Materiales")
-            material_a_editar= input("Escribe el material a editar: ")
-            edit=input("¿Que deseas editar(stock,proveedor,precio,todo)? ")
-            InventarioService.editar_materiales(datos_objetos,material_a_editar, edit)
+            opcion = input("¿Qué deseas editar (stock, proveedor, precio, todo)?: ").lower()
+
+            if opcion == "stock":
+                valor = int(input(f"Ingresa el nuevo stock: "))
+                InventarioService.editar_materiales(datos_objetos, buscado, opcion, valor)
+            
+            elif opcion == "precio":
+                valor = float(input(f"Ingresa el nuevo precio: "))
+                InventarioService.editar_materiales(datos_objetos, buscado, opcion, valor)
+            
+            elif opcion == "proveedor":
+                valor = input(f"Ingresa el nuevo proveedor: ")
+                InventarioService.editar_materiales(datos_objetos, buscado, opcion, valor)
+                
+            elif opcion == "todo":
+                # Creamos un pequeño paquete con los 3 datos
+                valores_todo = {
+                    'stock': int(input("Nuevo stock: ")),
+                    'precio': float(input("Nuevo precio: ")),
+                    'proveedor': input("Nuevo proveedor: ")
+                }
+                InventarioService.editar_materiales(datos_objetos, buscado, opcion, valores_todo)
         
         elif accion.lower() == "eliminar material" :
             print("Eliminar Materiales")

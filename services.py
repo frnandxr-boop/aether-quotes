@@ -19,46 +19,40 @@ class InventarioService:
             list_mat.append(mat)
                 
     @classmethod
-    def editar_materiales(cls, datos_objetos, material_a_editar, edit):
-            nvo_precio =[]
-            nvo_stock=[]
-            nvo_proveedor=[]
-            todo=[]
-            material_edit=next((m for m in datos_objetos if m.nombre == material_a_editar), None)
-            #funciones para todas los posibles cambios/ediciones
-            def editar_stock(material):
-                    nvo_stock = int(input(f"Ingresa la cantidad en stock de {material.nombre}: "))
-                    material_edit.stock = nvo_stock
-                    print(f'stock actualizado con exito: {material.nombre} -- {material.stock}')
-                    
-            def editar_precio(material):    
-                    nvo_precio = float(input(f"Ingresa el nuevo precio de {material.nombre}: "))
-                    material_edit.precio= nvo_precio
-                    print(f'Precio actualizado con exito: {material.nombre} -- {material.precio}')
-                    
-            def editar_proveedor(material):       
-                    nvo_proveedor = str(input(f'ingresa el nuevo proveedor de {material.nombre}: '))
-                    material_edit.proveedor = nvo_proveedor
-                    print(f'Provedor actualizado con exito: {material.nombre} -- {material.proveedor}')
-            #Se crea una funcion que englobe todo 
-            def editar_todo(material):
-                    editar_stock(material_edit)
-                    editar_precio(material_edit)
-                    editar_proveedor(material_edit)
-                    print(f"{material.nombre} editado con exito : {material.nombre}-- {material.precio}--{material.proveedor}--{material.stock}")
-            #Se llaman y activan las funciones 
-            if edit.lower() == 'stock':
-                editar_stock(material_edit)
-            elif edit.lower() == 'precio':
-                editar_precio(material_edit)
-            elif edit.lower() == 'proveedor':
-                editar_proveedor(material_edit)
-            elif edit.lower() == 'todo':
-                editar_todo(material_edit)
+    def editar_materiales(cls, datos_objetos, mat_buscado, opcion, nuevo_valor):
+        encontrado = False
+        material_a_editar = None
+
+        # 1. Buscar el material en la lista
+        for m in datos_objetos:
+            if m.nombre.lower() == mat_buscado.lower():
+                material_a_editar = m
+                encontrado = True
+                break 
+        
+        if not encontrado:
+            print(f'Error: {mat_buscado} no encontrado')
+            return False
+
+        # 2. Aplicar el cambio dependiendo de la opción
+        if opcion == "stock":
+            material_a_editar.stock = nuevo_valor
+        elif opcion == "precio":
+            material_a_editar.precio = nuevo_valor
+        elif opcion == "proveedor":
+            material_a_editar.proveedor = nuevo_valor
+        elif opcion == "todo":
+            # En 'todo', nuevo_valor será una lista o diccionario con los 3 datos
+            material_a_editar.stock = nuevo_valor['stock']
+            material_a_editar.precio = nuevo_valor['precio']
+            material_a_editar.proveedor = nuevo_valor['proveedor']
+
+        print(f"Cambio aplicado con éxito a: {material_a_editar.nombre}")
+        return True
+            
                 
     @classmethod
     def eliminar_materiales(cls,datos_objetos, busqueda):
-            material_a_eliminar.buscar_material(busqueda)
             for material in datos_objetos :
                 if material.nombre.lower() == busqueda:
                     print(material)
