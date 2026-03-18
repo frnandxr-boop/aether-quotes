@@ -1,7 +1,24 @@
 from models import Material
 import json
 from services import InventarioService
- 
+
+
+def leer_float(mensaje):
+        while True:
+            try:
+                valor = float(input(mensaje))
+                return valor 
+            except ValueError:
+                print ("escibe un dato valido")
+
+def leer_entero(mensaje):
+        while True:
+            try:
+                valor = int(input(mensaje))
+                return valor 
+            except ValueError:
+                print ("escibe un dato valido")
+
 #trata de:
 try: 
     #Ver y/o leer el archivo existente antes de agregar mas datos y en caso de estar vacio o no existir se creara uno vacio
@@ -21,8 +38,7 @@ print(f"--- Sistema Iniciado: Valor Total en Almacén: ${total_dinero} , valor d
 #Nuestra lista vacia 
 list_mat = []
 #Se inicia un bucle while para que se puedan agregar mas datos a nuestra lista
-while True:
-    
+while True:   
     try:
         #Se le muestra al usuario las acciones que puede realizar
         print("Acciones : Agregar material | Editar valores | Eliminar material | Buscar Material | Salir ")
@@ -53,13 +69,14 @@ while True:
             # Primero verificamos si existe antes de preguntar qué editar
             print("Editor de Materiales")
             opcion = input("¿Qué deseas editar (stock, proveedor, precio, todo)?: ").lower()
-
+            
             if opcion == "stock":
-                valor = int(input(f"Ingresa el nuevo stock: "))
+                valor= leer_entero(f"Ingresa el nuevo stock del {buscado}: ")
                 InventarioService.editar_materiales(datos_objetos, buscado, opcion, valor)
+                
             
             elif opcion == "precio":
-                valor = float(input(f"Ingresa el nuevo precio: "))
+                valor = leer_float(f"Ingresa el nuevo precio de: ")
                 InventarioService.editar_materiales(datos_objetos, buscado, opcion, valor)
             
             elif opcion == "proveedor":

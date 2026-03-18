@@ -6,12 +6,6 @@
     "stock": 30
   },
   {
-    "nombre": "cinta de aislante",
-    "precio": 20.0,
-    "proveedor": "marca patito",
-    "stock": 40
-  },
-  {
     "nombre": "tornillos",
     "precio": 50.0,
     "proveedor": "marca propia",
@@ -19,9 +13,9 @@
   },
   {
     "nombre": "pala",
-    "precio": 88.0,
+    "precio": 100.5,
     "proveedor": "Ferreter",
-    "stock": 40
+    "stock": 100
   },
   {
     "nombre": "martillo",
@@ -34,5 +28,23 @@
     "precio": 70.0,
     "proveedor": "truper",
     "stock": 100
+  },
+  {
+    "nombre": "varilla ",
+    "precio": 380.0,
+    "proveedor": "marca patito",
+    "stock": 1000
+  },
+  {
+    "nombre": "arena",
+    "precio": 120.0,
+    "proveedor": "pollito materiles",
+    "stock": 1000
+  },
+  {
+    "nombre": "cinta de aislar",
+    "precio": 120.0,
+    "proveedor": "masquin",
+    "stock": 40
   }
 ]
