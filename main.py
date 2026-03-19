@@ -97,7 +97,6 @@ while True:
             max_nom = ""
             min_stock= 0
             InventarioService.estadistica(datos_objetos,total_dinero,max_stock,max_nom)
-                    
         
         elif accion.lower() == "salir":
             break
