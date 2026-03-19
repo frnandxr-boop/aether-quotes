@@ -53,6 +53,8 @@ class InventarioService:
                 
     @classmethod
     def eliminar_materiales(cls,datos_objetos, busqueda):
+            encontrado = False
+            material_a_eliminar = None
             for material in datos_objetos :
                 if material.nombre.lower() == busqueda:
                     print(material)
@@ -61,7 +63,7 @@ class InventarioService:
                     break
             if encontrado == True :
                 datos_objetos.remove(material_a_eliminar)
-                print(f"{material_a_eliminar} eliminado con exito ")
+                print(f"{material_a_eliminar.nombre} eliminado con exito ")
             else:
-                print(f"{material_a_eliminar} no encontrada en lista")
+                print(f"{material_a_eliminar.nombre} no encontrada en lista")
     
