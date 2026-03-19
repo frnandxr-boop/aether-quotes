@@ -64,4 +64,13 @@ class InventarioService:
                 print(f"{material_a_eliminar} eliminado con exito ")
             else:
                 print(f"{material_a_eliminar} no encontrada en lista")
-    
+    @classmethod
+    def estadistica(cls, datos_objetos, total_dinero,max_stock,max_nom):
+        for m in datos_objetos:
+            total_dinero += m.precio * m.stock
+            if m.stock > max_stock :
+                max_stock = m.stock
+                max_nom = m.nombre
+        print(f"Valor Total en Almacén: ${total_dinero} ")
+        print(f'el material con el numero en stock mas alto es :{max_nom}, con: {max_stock} en stock')  
+
