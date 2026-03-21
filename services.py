@@ -1,4 +1,12 @@
 from models import Material
+import logging
+#Configuracion basica de logging
+logging.basicConfig(
+    filename= 'movimientos.log',
+    filemode= 'a',
+    level= logging.INFO,
+    format= '%(asctime)s - %(levelname)s - %(message)s'
+)
 class InventarioService:
     @classmethod
     def buscar_material(cls, datos_objetos,busqueda):
@@ -7,10 +15,14 @@ class InventarioService:
         for material in datos_objetos :
             if material.nombre.lower() == busqueda:
                 print(material)
-                encontrado = True
-                break 
+                encontrado = True 
+                break
         if not encontrado:
-            print(f'{busqueda} no encontrado')
+            print(f"Error: {busqueda} no encotrado")
+            logging.error(f"Error: {busqueda} no encotrado")
+            return busqueda
+
+
     
     @classmethod
     def agregar_materiales(cls, list_mat, nombre, precio, proveedor, stock):
@@ -29,9 +41,9 @@ class InventarioService:
                 material_a_editar = m
                 encontrado = True
                 break 
-        
         if not encontrado:
             print(f'Error: {mat_buscado} no encontrado')
+            logging.error(f"Error: {mat_buscado} no encotrado")
             return False
 
         # 2. Aplicar el cambio dependiendo de la opción
@@ -48,6 +60,7 @@ class InventarioService:
             material_a_editar.proveedor = nuevo_valor['proveedor']
 
         print(f"Cambio aplicado con éxito a: {material_a_editar.nombre}")
+        logging.info(f"Cambio aplicado exitosamente: {material_a_editar} ")
         return True
             
                 
@@ -64,8 +77,10 @@ class InventarioService:
             if encontrado == True :
                 datos_objetos.remove(material_a_eliminar)
                 print(f"{material_a_eliminar.nombre} eliminado con exito ")
+                logging.info(f"{material_a_eliminar} fue eliminado exitosamente")
             else:
                 print(f"{material_a_eliminar} no encontrada en lista")
+                logging.info(f"{material_a_eliminar} no encontrado")
     @classmethod
     def estadistica(cls, datos_objetos, total_dinero,max_stock,max_nom,min_stock,min_nom,opcion):
         while True:
@@ -86,6 +101,7 @@ class InventarioService:
                         break
                 except Exception as e:
                     print(f"Error al procesar {m.nombre}: {e}")
+                    logging.error(f"Error: no se pudo procesar {m.nombre}: {e}")
             if opcion.lower() == "total":
                 print(f"Valor Total en Almacén: ${total_dinero} ")
                 break

@@ -34,6 +34,7 @@ list_mat = []
 #Se inicia un bucle while para que se puedan agregar mas datos a nuestra lista
 while True:   
     try:
+        
         #Se le muestra al usuario las acciones que puede realizar
         print("Acciones : Agregar material | Editar valores | Eliminar material | Buscar Material | Estadistica | Salir ")
         #Se crea la variable 'accion' para guardar la respuesta del usuario
@@ -86,10 +87,10 @@ while True:
                 }
                 InventarioService.editar_materiales(datos_objetos, buscado, opcion, valores_todo)
         
-            elif accion.lower() == "eliminar material" :
-                print("Eliminar Materiales")
-                busqueda=input("¿Que material quieres eliminar?")
-                InventarioService.eliminar_materiales(datos_objetos, busqueda)
+        elif accion.lower() == "eliminar material" :
+            print("Eliminar Materiales")
+            busqueda=input("¿Que material quieres eliminar?")
+            InventarioService.eliminar_materiales(datos_objetos, busqueda)
                 
         elif accion.lower() == "estadistica" :
             total_dinero = 0
