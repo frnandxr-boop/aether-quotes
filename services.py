@@ -1,5 +1,7 @@
 from models import Material
 import logging
+
+
 #Configuracion basica de logging
 logging.basicConfig(
     filename= 'movimientos.log',

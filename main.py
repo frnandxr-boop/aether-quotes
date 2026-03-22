@@ -1,6 +1,7 @@
 from models import Material
 import json
 from services import InventarioService
+import sqlite3
 
 
 def leer_float(mensaje):
@@ -18,7 +19,6 @@ def leer_entero(mensaje):
                 return valor 
             except ValueError:
                 print ("escibe un dato valido")
-
 #trata de:
 try: 
     #Ver y/o leer el archivo existente antes de agregar mas datos y en caso de estar vacio o no existir se creara uno vacio
@@ -114,3 +114,11 @@ datos_g=[m.to_dict() for m in datos_objetos]
 with open ('inventario.json', 'w') as mat:
    json.dump(datos_g, mat, indent=2)
 lista_mat_final =[]
+create_table = 
+CREATE TABLE IF NOT EXISTS inventario (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    precio REAL NOT NULL,
+    proveedor TEXT NOT NULL,
+    stock INTEGER NOT NULL
+);
