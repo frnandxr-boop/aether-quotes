@@ -19,15 +19,17 @@ def leer_entero(mensaje):
                 return valor 
             except ValueError:
                 print ("escibe un dato valido")
-#trata de:
-try: 
-    #Ver y/o leer el archivo existente antes de agregar mas datos y en caso de estar vacio o no existir se creara uno vacio
-    with open ('inventario.json' , 'r') as mat:
-        datos_guardados=json.load(mat)
-except FileNotFoundError:
-    datos_guardados=[]
+conexion= sqlite3.connect('aether_inventario.db')
+cursor= conexion.cursor()
+cursor.execute("SELECT * FROM materiales")
+filas= cursor.fetchall()
+list_mat= []
+for fila in filas:
+    nuevo_material = Material(fila[1], fila[2], fila[3], fila[4])
+    list_mat.append(nuevo_material)
+conexion.close()            
+datos_objetos= list_mat
 
-datos_objetos = [Material.from_inventario(d) for d in datos_guardados]
 
 #Nuestra lista vacia 
 list_mat = []
@@ -108,17 +110,3 @@ while True:
         print(f'error {e} ')
 #se crea el diccionario recorriendo la lista con todos sus datos 
 datos_g=[m.to_dict() for m in datos_objetos]
-#-----Creacion de .JSON----
-#Se define una lista a la cual se agregaran los nuevos datos
-#se abre el archivo .JSON y se escriben los nuevos materiales agregando los que ya estaban anteriormente
-with open ('inventario.json', 'w') as mat:
-   json.dump(datos_g, mat, indent=2)
-lista_mat_final =[]
-create_table = 
-CREATE TABLE IF NOT EXISTS inventario (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nombre TEXT NOT NULL,
-    precio REAL NOT NULL,
-    proveedor TEXT NOT NULL,
-    stock INTEGER NOT NULL
-);

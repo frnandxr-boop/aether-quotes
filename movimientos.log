@@ -21,3 +21,6 @@
 2026-03-20 15:21:00,799 - ERROR - Error: pan no encotrado
 2026-03-20 15:22:15,069 - ERROR - Error: pan no encotrado
 2026-03-20 15:23:15,011 - ERROR - Error: pan no encotrado
+2026-03-30 16:15:39,034 - INFO - Material agregado: Material:cafe| Precio:$25.0| Proveedor :oxxo| Stock:50
+2026-03-30 16:18:11,091 - INFO - Material:cafe| Precio:$25.0| Proveedor :oxxo| Stock:50 fue eliminado exitosamente
+2026-03-30 16:22:55,243 - INFO - Cambio aplicado exitosamente: Material:silicon| Precio:$65.0| Proveedor :acrilastic| Stock:70 
